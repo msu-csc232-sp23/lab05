@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract "Collection< T >" {
++ size(): size_t
++ add( item: T ): bool
++ remove( ): bool
++ ~Collection( ) = default
+}
+
+"Collection< T >" <|-- "ChainCollection< T >"
+
+class "ChainCollection< T >" {
+- headPtr: *DNode< T >
+- count : size_t
++ size() override: size_t
++ add( item: T ) override: bool
++ remove( ) override: bool
+}
+
+"DNode< T >" *-- "ChainCollection< T >"
+
+class "DNode< T >" {
+- data: T
+- nextPtr: DNode<T>*
+- prevPtr: DNode< T >*
++ DNode(item: T = T{ }, nPtr: DNode< T >* = nullptr, pPtr: DNode< T >* = nullptr)
+}
+@enduml
